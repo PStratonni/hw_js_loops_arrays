@@ -32,21 +32,26 @@ for (let i = 0; i < teams.length + 1; i++) {
   resultTable[i] = [];
 }
 for (let i = 0; i < teams.length + 1; i++) {
-  for (let j = 0; j < teams.length + 1; j++) {
+  for (let j = i; j < teams.length + 1; j++) {
     if (i === 0 && j === 0) {
       resultTable[i][j] = "X";
       continue;
     }
     if (i === 0) {
       resultTable[i][j] = resultTable[j][i] = teams[j - 1];
+      continue;
     }
     if (i === j) {
       resultTable[i][j] = "X";
+      continue;
     }
-    if (i > 0 && j > i) {
-      resultTable[i][j] = resultTable[j][i] = `${Math.floor(
-        Math.random() * Math.floor(3)
-      )} - ${Math.floor(Math.random() * Math.floor(3))}`;
+    resultTable[i][j] = resultTable[j][i] = Math.floor(
+      Math.random() * Math.floor(3)
+    );
+    if (resultTable[i][j] === 1) {
+      resultTable[j][i] = 2;
+    } else if (resultTable[i][j] === 2) {
+      resultTable[j][i] = 1;
     }
   }
 }
